@@ -1,11 +1,9 @@
 package view;
 import controller.*;
-import model.MySQLConnector;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.sql.*;
 
 public class TelaDeCadastroView extends JFrame
 {

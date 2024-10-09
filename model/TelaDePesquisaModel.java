@@ -59,4 +59,77 @@ public class TelaDePesquisaModel {
             System.err.println("Erro: " + e);
         }
     }
+
+    public static void registroAnteriorModel(String textoPesquisa, String idAtual, String nomeAtual, String emailAtual) {
+        try {
+            Connection conexao = MySQLConnector.conectar();
+            String strSqlProximoRegistro = "select * from `db_senac`.`tbl_senac` where (`nome` like '%" + textoPesquisa + "%' or `email` like '%" + textoPesquisa + "%') and `id` < " + idAtual + " order by `id` desc;";
+            Statement stmSqlProximoRegistro = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rstSqlProximoRegistro = stmSqlProximoRegistro.executeQuery(strSqlProximoRegistro);
+            if (rstSqlProximoRegistro.next()) {
+                TelaDePesquisaController.preencherCampos(rstSqlProximoRegistro.getString("id"), rstSqlProximoRegistro.getString("nome"), rstSqlProximoRegistro.getString("email"));
+                TelaDePesquisaController.habilitarTodos();
+            } else {
+                TelaDePesquisaController.preencherCampos(idAtual, nomeAtual, emailAtual);
+
+                TelaDePesquisaController.habilitarAvancar();
+
+                TelaDePesquisaController.notificarUsuario("Você chegou ao primeiro registro.");
+            }
+            stmSqlProximoRegistro.close();
+        } catch (Exception e) {
+            TelaDePesquisaController.notificarUsuario("Não foi possível encontrar o próximo registro! Por favor, verifique e tente novamente.");
+            System.err.println("Erro: " + e);
+        }
+    }
+
+    public static void proximoRegistroModel(String textoPesquisa, String idAtual, String nomeAtual, String emailAtual) {
+        try {
+            Connection conexao = MySQLConnector.conectar();
+            String strSqlProximoRegistro = "select * from `db_senac`.`tbl_senac` where (`nome` like '%" + textoPesquisa + "%' or `email` like '%" + textoPesquisa + "%') and `id` > " + idAtual + " order by `id` asc;";
+            Statement stmSqlProximoRegistro = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rstSqlProximoRegistro = stmSqlProximoRegistro.executeQuery(strSqlProximoRegistro);
+            if (rstSqlProximoRegistro.next()) {
+                TelaDePesquisaController.preencherCampos(rstSqlProximoRegistro.getString("id"), rstSqlProximoRegistro.getString("nome"), rstSqlProximoRegistro.getString("email"));
+
+                TelaDePesquisaController.habilitarTodos();
+            } else {
+                TelaDePesquisaController.preencherCampos(idAtual, nomeAtual, emailAtual);
+
+                TelaDePesquisaController.habilitarVoltar();
+
+                TelaDePesquisaController.notificarUsuario("Você chegou ao último registro.");
+            }
+            stmSqlProximoRegistro.close();
+        } catch (Exception e) {
+            TelaDePesquisaController.notificarUsuario("Não foi possível encontrar o próximo registro! Por favor, verifique e tente novamente.");
+            System.err.println("Erro: " + e);
+        }
+    }
+
+    public static void ultimoRegistroModel(String textoPesquisa, String idAtual, String nomeAtual, String emailAtual) {
+        try {
+            Connection conexao = MySQLConnector.conectar();
+            String strSqlProximoRegistro = "select * from `db_senac`.`tbl_senac` where `nome` like '%" + textoPesquisa + "%' or `email` like '%" + textoPesquisa + "%' order by `id` desc;";
+            Statement stmSqlProximoRegistro = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rstSqlProximoRegistro = stmSqlProximoRegistro.executeQuery(strSqlProximoRegistro);
+            if (rstSqlProximoRegistro.next()) {
+                TelaDePesquisaController.preencherCampos(rstSqlProximoRegistro.getString("id"), rstSqlProximoRegistro.getString("nome"), rstSqlProximoRegistro.getString("email"));
+
+                TelaDePesquisaController.habilitarVoltar();
+
+                TelaDePesquisaController.notificarUsuario("Você chegou ao último registro.");
+            } else {
+                TelaDePesquisaController.preencherCampos(idAtual, nomeAtual, emailAtual);
+
+                TelaDePesquisaController.habilitarVoltar();
+
+                TelaDePesquisaController.notificarUsuario("Você chegou ao último registro.");
+            }
+            stmSqlProximoRegistro.close();
+        } catch (Exception e) {
+            TelaDePesquisaController.notificarUsuario("Não foi possível encontrar o último registro! Por favor, verifique e tente novamente.");
+            System.err.println("Erro: " + e);
+        }
+    }
 }
