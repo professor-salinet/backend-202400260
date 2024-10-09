@@ -17,33 +17,46 @@ public class TelaDePesquisaModel {
 
                 stmSqlPesquisa.close();
                 TelaDePesquisaController.notificarUsuario("Legal! Foi(Foram) encontrado(s) " + rowNumbers + " resultado(s).");
-                // lblNotificacoes.setText(setHtmlFormat("Legal! Foi(Foram) encontrado(s) " + rowNumbers + " resultado(s)."));
 
                 TelaDePesquisaController.preencherCampos(rstSqlPesquisa.getString("id"), rstSqlPesquisa.getString("nome"), rstSqlPesquisa.getString("email"));
-                // txtId.setText(rstSqlPesquisa.getString("id"));
-                // txtNome.setText(rstSqlPesquisa.getString("nome"));
-                // txtEmail.setText(rstSqlPesquisa.getString("email"));
+                TelaDePesquisaController.registrarPesquisa();
 
-                // criar métodos: habilitarVoltar habilitarTodos habilitarAvancar
-                // txtUsuario = textoPesquisa;
-                // btnPesquisar.setEnabled(false);
-                // if (rowNumbers > 1) {
-                //     btnProximo.setEnabled(true);
-                //     btnUltimo.setEnabled(true);
-                // }
+                TelaDePesquisaController.desabilitarPesquisar();
+                if (rowNumbers > 1) {
+                    TelaDePesquisaController.habilitarAvancar();
+                }
             } else {
-                // txtUsuario = textoPesquisa;
-                // btnPesquisar.setEnabled(false);
-                // lblNotificacoes.setText(setHtmlFormat("Poxa vida! Não foram encontrados resultados para: \"" + textoPesquisa + "\"."));
+                TelaDePesquisaController.registrarPesquisa();
+                TelaDePesquisaController.desabilitarPesquisar();
                 stmSqlPesquisa.close();
                 TelaDePesquisaController.notificarUsuario("Poxa vida! Não foram encontrados resultados para: \"" + textoPesquisa + "\".");
-                // return 2;
             }
         } catch (Exception e) {
-            // lblNotificacoes.setText(setHtmlFormat("Não foi possível prosseguir com a pesquisa! Por favor, verifique e tente novamente."));
             System.err.println("Erro: " + e);
             TelaDePesquisaController.notificarUsuario("Não foi possível prosseguir com a pesquisa! Por favor, verifique e tente novamente.");
-            // return 0;
+        }
+    }
+
+    public static void primeiroRegistroModel(String textoPesquisa) {
+        try {
+            Connection conexao = MySQLConnector.conectar();
+            String strSqlPesquisa = "select * from `db_senac`.`tbl_senac` where `nome` like '%" + textoPesquisa + "%' or `email` like '%" + textoPesquisa + "%' order by `id` asc;";
+            Statement stmSqlPesquisa = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rstSqlPesquisa = stmSqlPesquisa.executeQuery(strSqlPesquisa);
+            if (rstSqlPesquisa.next()) {
+                TelaDePesquisaController.preencherCampos(rstSqlPesquisa.getString("id"), rstSqlPesquisa.getString("nome"), rstSqlPesquisa.getString("email"));
+
+                TelaDePesquisaController.habilitarAvancar();
+            } else {
+                TelaDePesquisaController.notificarUsuario("Poxa vida! Não foram encontrados resultados para: \"" + textoPesquisa + "\".");
+            }
+            TelaDePesquisaController.registrarPesquisa();
+
+            TelaDePesquisaController.desabilitarPesquisar();
+            stmSqlPesquisa.close();
+        } catch (Exception e) {
+            TelaDePesquisaController.notificarUsuario("Não foi possível prosseguir com a pesquisa! Por favor, verifique e tente novamente.");
+            System.err.println("Erro: " + e);
         }
     }
 }

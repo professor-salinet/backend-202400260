@@ -15,6 +15,10 @@ public class TelaDePesquisaController extends TelaDePesquisaView {
         txtEmail.setText(email);
     }
 
+    public static void registrarPesquisa() {
+        txtUsuario = txtPesquisa.getText();
+    }
+
     public static void pesquisar() {
         if (txtPesquisa.getText().trim().equals(txtUsuario) == false) {
             limparCampos("");
@@ -22,28 +26,8 @@ public class TelaDePesquisaController extends TelaDePesquisaView {
     }
 
     public static void primeiroRegistro() {
-        try {
-            limparCampos("Você está no primeiro registro.");
-            Connection conexao = MySQLConnector.conectar();
-            String strSqlPesquisa = "select * from `db_senac`.`tbl_senac` where `nome` like '%" + txtPesquisa.getText() + "%' or `email` like '%" + txtPesquisa.getText() + "%' order by `id` asc;";
-            Statement stmSqlPesquisa = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rstSqlPesquisa = stmSqlPesquisa.executeQuery(strSqlPesquisa);
-            if (rstSqlPesquisa.next()) {
-                txtId.setText(rstSqlPesquisa.getString("id"));
-                txtNome.setText(rstSqlPesquisa.getString("nome"));
-                txtEmail.setText(rstSqlPesquisa.getString("email"));
-                btnProximo.setEnabled(true);
-                btnUltimo.setEnabled(true);
-            } else {
-                lblNotificacoes.setText(setHtmlFormat("Poxa vida! Não foram encontrados resultados para: \"" + txtPesquisa.getText() + "\"."));
-            }
-            txtUsuario = txtPesquisa.getText();
-            btnPesquisar.setEnabled(false);
-            stmSqlPesquisa.close();
-        } catch (Exception e) {
-            lblNotificacoes.setText(setHtmlFormat("Não foi possível prosseguir com a pesquisa! Por favor, verifique e tente novamente."));
-            System.err.println("Erro: " + e);
-        }
+        limparCampos("Você está no primeiro registro.");
+        TelaDePesquisaModel.primeiroRegistroModel(txtPesquisa.getText());
     }
 
     public static void registroAnterior() {
@@ -143,4 +127,29 @@ public class TelaDePesquisaController extends TelaDePesquisaView {
         }
     }
 
+    public static void desabilitarTodos() {
+        btnPrimeiro.setEnabled(false);
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(false);
+        btnUltimo.setEnabled(false);
+    }
+    public static void habilitarVoltar() {
+        desabilitarTodos();
+        btnPrimeiro.setEnabled(true);
+        btnAnterior.setEnabled(true);
+    }
+    public static void habilitarTodos() {
+        btnPrimeiro.setEnabled(true);
+        btnAnterior.setEnabled(true);
+        btnProximo.setEnabled(true);
+        btnUltimo.setEnabled(true);
+    }
+    public static void habilitarAvancar() {
+        desabilitarTodos();
+        btnProximo.setEnabled(true);
+        btnUltimo.setEnabled(true);
+    }
+    public static void desabilitarPesquisar() {
+        btnPesquisar.setEnabled(false);
+    }
 }
