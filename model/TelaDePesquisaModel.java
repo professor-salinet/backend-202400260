@@ -15,7 +15,6 @@ public class TelaDePesquisaModel {
                 int rowNumbers = rstSqlPesquisa.getRow();
                 rstSqlPesquisa.first();
 
-                stmSqlPesquisa.close();
                 TelaDePesquisaController.notificarUsuario("Legal! Foi(Foram) encontrado(s) " + rowNumbers + " resultado(s).");
 
                 TelaDePesquisaController.preencherCampos(rstSqlPesquisa.getString("id"), rstSqlPesquisa.getString("nome"), rstSqlPesquisa.getString("email"));
@@ -25,11 +24,12 @@ public class TelaDePesquisaModel {
                 if (rowNumbers > 1) {
                     TelaDePesquisaController.habilitarAvancar();
                 }
+                stmSqlPesquisa.close();
             } else {
                 TelaDePesquisaController.registrarPesquisa();
                 TelaDePesquisaController.desabilitarPesquisar();
-                stmSqlPesquisa.close();
                 TelaDePesquisaController.notificarUsuario("Poxa vida! Não foram encontrados resultados para: \"" + textoPesquisa + "\".");
+                stmSqlPesquisa.close();
             }
         } catch (Exception e) {
             System.err.println("Erro: " + e);

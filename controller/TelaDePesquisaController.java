@@ -18,8 +18,10 @@ public class TelaDePesquisaController extends TelaDePesquisaView {
     }
 
     public static void pesquisar() {
-        if (txtPesquisa.getText().trim().equals(txtUsuario) == false) {
+        String textoPesquisa = txtPesquisa.getText().trim();
+        if (textoPesquisa.equals(txtUsuario) == false) {
             limparCampos("");
+            TelaDePesquisaModel.pesquisarModel(textoPesquisa);
         }
     }
 
