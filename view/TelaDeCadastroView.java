@@ -77,7 +77,7 @@ public class TelaDeCadastroView extends JFrame
             }
         );
 
-        setSize(250, 600);
+        setSize(250, 250);
         setVisible(true);
     }
 
