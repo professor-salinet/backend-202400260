@@ -1,5 +1,9 @@
 public class Classe3 {
-    String[] operadoresMatematicos = {"Soma", "Subtração", "Multiplicação", "Divisão"};
+    private static final String[] operadoresMatematicos = {"Soma", "Subtração", "Multiplicação", "Divisão"};
+
+    public static String[] pegarOpcoes() {
+        return operadoresMatematicos;
+    }
 
     public static int somar(int numero1, int numero2) {
         return numero1 + numero2;
