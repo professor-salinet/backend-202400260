@@ -11,11 +11,12 @@ public class Classe1 {
         String[] opcoes = Classe2.mostrarOpcoes();
 
         for (int count = 0; count < opcoes.length; count++) {
-            System.out.println("1 - " + opcoes[count]);
+            System.out.println(count + " - " + opcoes[count]);
         }
 
-        int resultadoDaSoma = Classe2.calcularSoma(intInputUsuario1, intInputUsuario2);
-        System.out.println("O resultado da soma é: " + resultadoDaSoma);
+        int opcaoEscolhida = scnInputUsuario.nextInt();
+
+        System.out.println("O resultado da " + opcoes[opcaoEscolhida] + " é: " + Classe2.resultado(intInputUsuario1, intInputUsuario2, opcaoEscolhida));
         scnInputUsuario.close();
     }
 }
