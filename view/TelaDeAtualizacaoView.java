@@ -132,8 +132,9 @@ public class TelaDeAtualizacaoView extends JFrame {
         return "<html><body>" + strTexto + "</body></html>";
     }
 
+    public static TelaDeAtualizacaoView appTelaDeAtualizacaoView;
     public static void main(String[] args) {
-        TelaDeAtualizacaoView appTelaDeAtualizacaoView = new TelaDeAtualizacaoView();
+        appTelaDeAtualizacaoView = new TelaDeAtualizacaoView();
         appTelaDeAtualizacaoView.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
