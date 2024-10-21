@@ -43,7 +43,9 @@ public class TelaDeLoginView extends JFrame
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    TelaDeLoginController.logarController(txtLogin.getText(), String.valueOf(txtSenha.getPassword()));
+                    if (validarCampos() == true) {
+                        TelaDeLoginController.logarController(txtLogin.getText(), String.valueOf(txtSenha.getPassword()));
+                    }
                 }
             }
         );
