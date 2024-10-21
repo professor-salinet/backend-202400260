@@ -10,9 +10,9 @@ public class TelaDeLoginModel {
             Statement stmSqlLogin = conexao.createStatement();
             ResultSet rstSqlLogin = stmSqlLogin.executeQuery(strSqlLogin);
             if (rstSqlLogin.next()) {
-                TelaDeLoginController.notificarUsuario("Conectado com sucesso!!!");
+                TelaDeLoginController.notificarUsuario("Login realizado com sucesso!!!");
             } else {
-                TelaDeLoginController.notificarUsuario("Login e/ou senha não encontrado! Por favor, verifique e tente novamente.");
+                TelaDeLoginController.notificarUsuario("Login e/ou senha não encontrados! Por favor, verifique e tente novamente.");
             }
             stmSqlLogin.close();
         } catch (Exception e) {

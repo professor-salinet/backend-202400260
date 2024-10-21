@@ -19,7 +19,7 @@ public class TelaDeLoginView extends JFrame
     public TelaDeLoginView()
     {
         super("Tela de Login");
-        setLayout(new FlowLayout());
+        setLayout(new GridLayout(6,1,5,5));
 
         lblLogin = new JLabel("Login:");
         add(lblLogin);
@@ -48,13 +48,60 @@ public class TelaDeLoginView extends JFrame
             }
         );
 
+        btnEntrar.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent event) {
+                    if (event.getKeyCode() == 10 && validarCampos() == true) {
+                        TelaDeLoginController.logarController(txtLogin.getText(), String.valueOf(txtSenha.getPassword()));
+                    }
+                }
+            }
+        );
+
+        txtSenha.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent event) {
+                    if (event.getKeyCode() == 10 && validarCampos() == true) {
+                        TelaDeLoginController.logarController(txtLogin.getText(), String.valueOf(txtSenha.getPassword()));
+                    }
+                }
+            }
+        );
+
+        txtLogin.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent event) {
+                    if (event.getKeyCode() == 10 && validarCampos() == true) {
+                        TelaDeLoginController.logarController(txtLogin.getText(), String.valueOf(txtSenha.getPassword()));
+                    }
+                }
+            }
+        );
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(150, 200);
+        setSize(150, 600);
         setVisible(true);
     }
 
+    public boolean validarCampos() {
+        if (txtLogin.getText().trim().length() == 0) {
+            TelaDeLoginController.notificarUsuario("Ops! É necessário digitar um login válido para continuar. Por favor, digite um login e tecle: \"Enter\".");
+            txtLogin.requestFocus();
+            return false;
+        }
+        if (String.valueOf(txtSenha.getPassword()).trim().length() == 0) {
+            TelaDeLoginController.notificarUsuario("Ops! É necessário digitar uma senha válida para continuar. Por favor, digite uma senha e tecle: \"Enter\".");
+            txtSenha.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     public static String setHtmlFormat(String strTexto) {
-        return "<html><body>" + strTexto + "</body></html>";
+        return "<html><body><center>" + strTexto + "</center></body></html>";
     }
 
     public static TelaDeLoginView appTelaDeLoginView;
