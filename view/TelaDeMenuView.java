@@ -51,7 +51,7 @@ public class TelaDeMenuView extends JFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    JOptionPane.showMessageDialog(null, "Você clicou no item: " + event.getActionCommand());
+                    TelaDeMenuController.abrirTelaDeCadastroView();
                 }
             }
         );
@@ -84,12 +84,12 @@ public class TelaDeMenuView extends JFrame {
         );
 
         setSize(500,500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
     public static TelaDeMenuView appTelaDeMenuView;
     public static void main(String[] args) {
         appTelaDeMenuView = new TelaDeMenuView();
+        appTelaDeMenuView.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
