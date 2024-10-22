@@ -60,7 +60,7 @@ public class TelaDeMenuView extends JFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    JOptionPane.showMessageDialog(null, "Você clicou no item: " + event.getActionCommand());
+                    TelaDeMenuController.abrirTelaDePesquisaView();
                 }
             }
         );
@@ -69,7 +69,7 @@ public class TelaDeMenuView extends JFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    JOptionPane.showMessageDialog(null, "Você clicou no item: " + event.getActionCommand());
+                    TelaDeMenuController.abrirTelaDeAtualizacaoView();
                 }
             }
         );
@@ -78,7 +78,7 @@ public class TelaDeMenuView extends JFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    JOptionPane.showMessageDialog(null, "Você clicou no item: " + event.getActionCommand());
+                    TelaDeMenuController.abrirTelaDeRemoverView();
                 }
             }
         );

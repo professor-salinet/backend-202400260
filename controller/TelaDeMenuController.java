@@ -17,4 +17,49 @@ public class TelaDeMenuController extends TelaDeMenuView {
             }
         );
     }
+
+    public static void abrirTelaDePesquisaView() {
+        TelaDePesquisaView.appTelaDePesquisaView = new TelaDePesquisaView();
+        TelaDePesquisaView.appTelaDePesquisaView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        appTelaDeMenuView.setVisible(false);
+
+        TelaDePesquisaView.appTelaDePesquisaView.addWindowListener(
+            new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    appTelaDeMenuView.setVisible(true);
+                }
+            }
+        );
+    }
+
+    public static void abrirTelaDeAtualizacaoView() {
+        TelaDeAtualizacaoView.appTelaDeAtualizacaoView = new TelaDeAtualizacaoView();
+        TelaDeAtualizacaoView.appTelaDeAtualizacaoView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        appTelaDeMenuView.setVisible(false);
+
+        TelaDeAtualizacaoView.appTelaDeAtualizacaoView.addWindowListener(
+            new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    appTelaDeMenuView.setVisible(true);
+                }
+            }
+        );
+    }
+
+    public static void abrirTelaDeRemoverView() {
+        TelaDeRemoverView.appTelaDeRemoverView = new TelaDeRemoverView();
+        TelaDeRemoverView.appTelaDeRemoverView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        appTelaDeMenuView.setVisible(false);
+
+        TelaDeRemoverView.appTelaDeRemoverView.addWindowListener(
+            new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    appTelaDeMenuView.setVisible(true);
+                }
+            }
+        );
+    }
 }
