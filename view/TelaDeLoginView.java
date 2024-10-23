@@ -83,8 +83,7 @@ public class TelaDeLoginView extends JFrame
             }
         );
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(150, 600);
+        setSize(200, 600);
         setVisible(true);
     }
 
@@ -109,6 +108,7 @@ public class TelaDeLoginView extends JFrame
     public static TelaDeLoginView appTelaDeLoginView;
     public static void main(String[] args) {
         appTelaDeLoginView = new TelaDeLoginView();
-        // appTelaDeLoginView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        appTelaDeLoginView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        InterfaceView.definirIcone(appTelaDeLoginView);
     }
 }
