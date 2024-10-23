@@ -5,7 +5,7 @@ import java.awt.image.*;
 import java.io.*;
 
 public class InterfaceView extends JFrame {
-    public static void definirIcone(JFrame frame) throws Exception {
+    public static void definirIcone(JFrame frame) {
         try {
             InputStream imageInputStream = frame.getClass().getResourceAsStream("senac-logo.png");
             BufferedImage bufferedImage = ImageIO.read(imageInputStream);
