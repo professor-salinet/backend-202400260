@@ -1,5 +1,6 @@
 package view;
 import javax.swing.*;
+import controller.*;
 import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
@@ -13,5 +14,9 @@ public class InterfaceView extends JFrame {
         } catch (Exception e) {
             System.err.println("Erro: " + e);
         }
+    }
+
+    public static void removerImagensInuteis() {
+        InterfaceController.verificarApagarImagensInuteis();
     }
 }

@@ -6,6 +6,7 @@ public class TelaDeMenuController extends TelaDeMenuView {
     public static void abrirTelaDeCadastroView() {
         TelaDeCadastroView.appTelaDeCadastroView = new TelaDeCadastroView();
         TelaDeCadastroView.appTelaDeCadastroView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        InterfaceView.definirIcone(TelaDeCadastroView.appTelaDeCadastroView);
 
         appTelaDeMenuView.setVisible(false);
 
@@ -21,6 +22,7 @@ public class TelaDeMenuController extends TelaDeMenuView {
     public static void abrirTelaDePesquisaView() {
         TelaDePesquisaView.appTelaDePesquisaView = new TelaDePesquisaView();
         TelaDePesquisaView.appTelaDePesquisaView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        InterfaceView.definirIcone(TelaDePesquisaView.appTelaDePesquisaView);
 
         appTelaDeMenuView.setVisible(false);
 
@@ -36,6 +38,7 @@ public class TelaDeMenuController extends TelaDeMenuView {
     public static void abrirTelaDeAtualizacaoView() {
         TelaDeAtualizacaoView.appTelaDeAtualizacaoView = new TelaDeAtualizacaoView();
         TelaDeAtualizacaoView.appTelaDeAtualizacaoView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        InterfaceView.definirIcone(TelaDeAtualizacaoView.appTelaDeAtualizacaoView);
 
         appTelaDeMenuView.setVisible(false);
 
@@ -51,6 +54,7 @@ public class TelaDeMenuController extends TelaDeMenuView {
     public static void abrirTelaDeRemoverView() {
         TelaDeRemoverView.appTelaDeRemoverView = new TelaDeRemoverView();
         TelaDeRemoverView.appTelaDeRemoverView.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        InterfaceView.definirIcone(TelaDeRemoverView.appTelaDeRemoverView);
 
         appTelaDeMenuView.setVisible(false);
 
