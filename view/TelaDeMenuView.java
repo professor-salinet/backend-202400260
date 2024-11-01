@@ -125,6 +125,7 @@ public class TelaDeMenuView extends JFrame {
     public static void main(String[] args) {
         appTelaDeMenuView = new TelaDeMenuView();
         appTelaDeMenuView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         appTelaDeMenuView.addWindowListener(
             new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
@@ -132,5 +133,6 @@ public class TelaDeMenuView extends JFrame {
                 }
             }
         );
+
     }
 }

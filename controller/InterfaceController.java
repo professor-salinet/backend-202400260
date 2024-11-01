@@ -26,7 +26,7 @@ public class InterfaceController extends InterfaceView {
                 listFilesForFolder(fileEntry);
             } else {
                 strFiles.add(fileEntry.getName());
-                System.out.println(fileEntry.getName());
+                // System.out.println(fileEntry.getName());
             }
         }
         return strFiles;

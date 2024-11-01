@@ -10,7 +10,7 @@ public class InterfaceModel {
         for (int i = 0; i < strImagens.size(); i++) {
             try {
                 String imgAtual = strImagens.get(i);
-                String strSqlValidarImagem = "select * from `db_senac`.`tbl_senac` where `img` = '" + imgAtual + "'";
+                String strSqlValidarImagem = "select * from `db_senac`.`tbl_senac` where `img` = '" + imgAtual + "';";
                 Connection conexao = MySQLConnector.conectar();
                 Statement stmSqlValidarImagem = conexao.createStatement();
                 ResultSet rstSqlValidarImagem = stmSqlValidarImagem.executeQuery(strSqlValidarImagem);
