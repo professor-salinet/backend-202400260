@@ -3,6 +3,8 @@ import model.*;
 import view.*;
 import java.io.*;
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class InterfaceController extends InterfaceView {
     public static final String localViewImgFolder = System.getProperty("user.dir") 
@@ -12,6 +14,14 @@ public class InterfaceController extends InterfaceView {
         + "view"
         + "\\"
         + "img";
+
+    public static final String localViewFolder = System.getProperty("user.dir") 
+        + "\\" 
+        + "src"
+        + "\\" 
+        + "view";
+
+    public static final Icon imgPadrao = new ImageIcon(new ImageIcon(localViewFolder + "\\imagem-padrao.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
     public static void verificarApagarImagensInuteis() {
         final File folder = new File(localViewImgFolder);
