@@ -41,4 +41,8 @@ public class InterfaceController extends InterfaceView {
         }
         return strFiles;
     }
+
+    public static String gerarNomeAleatorio() {
+        return String.format("file-%s", Math.random());
+    }
 }

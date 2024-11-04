@@ -114,8 +114,10 @@ public class TelaDeAtualizacaoController extends TelaDeAtualizacaoView {
 
             String folderFullPath = InterfaceController.localViewImgFolder;
 
+            String newFileName = InterfaceController.gerarNomeAleatorio() + "-" + fileName;
+
             Path pathOrigin = Paths.get(fileFullPath);
-            Path pathDestination = Paths.get(folderFullPath + "\\" + fileName);
+            Path pathDestination = Paths.get(folderFullPath + "\\" + newFileName);
             if (fileFullPath.length() > 0 && folderFullPath.length() > 0) {
                 Files.copy(pathOrigin, pathDestination, REPLACE_EXISTING);
                 System.out.println("Arquivo " + fileName + " copiado/colado com sucesso!");

@@ -133,7 +133,7 @@ public class TelaDeAtualizacaoView extends JFrame {
             @Override
                 public void itemStateChanged(ItemEvent event) {
                     if (event.getStateChange() == ItemEvent.SELECTED) {
-                        TelaDeAtualizacaoController.atualizarCampos(cbxId.getSelectedItem().toString());
+                        TelaDeAtualizacaoController.atualizarCampos(String.valueOf(cbxId.getSelectedItem()));
                     }
                 } 
             }
