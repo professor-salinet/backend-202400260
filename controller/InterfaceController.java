@@ -21,7 +21,7 @@ public class InterfaceController extends InterfaceView {
         + "\\" 
         + "view";
 
-    public static final Icon imgPadrao = new ImageIcon(new ImageIcon(localViewFolder + "\\imagem-padrao.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+    public static final Icon imgPadrao = new ImageIcon(new ImageIcon(localViewFolder + "\\imagem-padrao.jpg").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 
     public static void verificarApagarImagensInuteis() {
         final File folder = new File(localViewImgFolder);

@@ -34,81 +34,87 @@ public class TelaDeAtualizacaoView extends JFrame {
 
     public static int tamanhoInputs = 20;
 
+    public static GridBagLayout gbLayout;
+    public static GridBagConstraints gbConstraints;
+
     public TelaDeAtualizacaoView()
     {
         super("Tela de Atualização");
-        setLayout(new GridLayout(7,1,5,5));
-
-        JPanel linha_id = new JPanel(new GridLayout(1, 2));
+        gbLayout = new GridBagLayout();
+        setLayout(gbLayout);
+        gbConstraints = new GridBagConstraints();
+        //   setLayout(new GridLayout(7,1,5,5));
 
         lblId = new JLabel("Id:", SwingConstants.RIGHT);
-        linha_id.add(lblId);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(lblId,0,1,1,1);
 
         TelaDeAtualizacaoController.popularIds();
         cbxId = new JComboBox<String>(ids);
-        linha_id.add(cbxId);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(cbxId,0,2,1,1);
 
-        add(linha_id);
-
-        JPanel linha_imagem = new JPanel(new GridLayout(1,3));
+        // add(linha_id);
 
         lblImagem = new JLabel(InterfaceController.imgPadrao);
-        linha_imagem.add(lblImagem);
+        // gbConstraints.fill = GridBagConstraints.BOTH;
+        addComponent(lblImagem, 0, 0, 1, 7);
 
         btnCarregarImagem = new JButton("Carregar Imagem");
-        linha_imagem.add(btnCarregarImagem);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(btnCarregarImagem, 1, 1, 1, 1);
 
         btnRemoverImagem = new JButton("Remover Imagem");
-        linha_imagem.add(btnRemoverImagem);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(btnRemoverImagem, 1, 2, 1, 1);
 
-        add(linha_imagem);
-
-        JPanel linha_nome = new JPanel(new GridLayout(1, 2));
+        // add(linha_imagem);
 
         lblNome = new JLabel("Nome:", SwingConstants.RIGHT);
-        linha_nome.add(lblNome);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(lblNome, 2, 1, 1, 1);
 
         txtNome = new JTextField(tamanhoInputs);
-        linha_nome.add(txtNome);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(txtNome, 2, 2, 1, 1);
 
-        add(linha_nome);
-
-        JPanel linha_email = new JPanel(new GridLayout(1, 2));
+        // add(linha_nome);
 
         lblEmail = new JLabel("Email:", SwingConstants.RIGHT);
-        linha_email.add(lblEmail);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(lblEmail, 3, 1, 1, 1);
 
         txtEmail = new JTextField(tamanhoInputs);
-        linha_email.add(txtEmail);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(txtEmail, 3, 2, 1, 1);
 
-        add(linha_email);
-
-        JPanel linha_senha = new JPanel(new GridLayout(1, 2));
+        // add(linha_email);
 
         lblSenha = new JLabel("Senha:", SwingConstants.RIGHT);
-        linha_senha.add(lblSenha);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(lblSenha, 4, 1, 1, 1);
 
         txtSenha = new JPasswordField(tamanhoInputs);
-        linha_senha.add(txtSenha);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(txtSenha, 4, 2, 1, 1);
 
-        add(linha_senha);
-
-        JPanel linha_botoes = new JPanel(new GridLayout(1, 2));
+        // add(linha_senha);
 
         btnAtualizar = new JButton("Atualizar");
-        linha_botoes.add(btnAtualizar);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(btnAtualizar, 5, 1, 1, 1);
 
         btnCancelar = new JButton("Cancelar");
-        linha_botoes.add(btnCancelar);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(btnCancelar, 5, 2, 1, 1);
 
-        add(linha_botoes);
-
-        JPanel linha_notificacoes = new JPanel(new GridLayout(1, 1));
+        // add(linha_botoes);
 
         lblNotificacoes = new JLabel("Notificações", SwingConstants.CENTER);
-        linha_notificacoes.add(lblNotificacoes);
+        // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(lblNotificacoes, 6, 1, 2, 1);
 
-        add(linha_notificacoes);
+        // add(linha_notificacoes);
 
         btnAtualizar.addActionListener(
             new ActionListener() {
@@ -157,7 +163,7 @@ public class TelaDeAtualizacaoView extends JFrame {
             }
         );
 
-        setSize(250, 300);
+        setSize(450, 200);
         ImageIcon img = new ImageIcon("./senac-logo.png");
         setIconImage(img.getImage());
         setVisible(true);
@@ -168,9 +174,34 @@ public class TelaDeAtualizacaoView extends JFrame {
         return "<html><body>" + strTexto + "</body></html>";
     }
 
+    public void addComponent(Component component, int row, int column, int width, int height) {
+        if (height > 1) {
+            gbConstraints.fill = GridBagConstraints.BOTH;
+        } else {
+            gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        }
+        gbConstraints.gridy = row;
+        gbConstraints.gridx = column;
+        gbConstraints.gridwidth = width;
+        gbConstraints.gridheight = height;
+        gbLayout.setConstraints(component, gbConstraints);
+        add(component);
+    }
+
     public static TelaDeAtualizacaoView appTelaDeAtualizacaoView;
     public static void main(String[] args) {
         appTelaDeAtualizacaoView = new TelaDeAtualizacaoView();
         appTelaDeAtualizacaoView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // appTelaDeAtualizacaoView.getRootPane().addComponentListener(
+        //     new ComponentAdapter() {
+        //         public void componentResized(ComponentEvent e) {
+        //             int larguraTela = appTelaDeAtualizacaoView.getWidth();
+        //             int alturaTela = appTelaDeAtualizacaoView.getHeight();
+        //             // This is only called when the user releases the mouse button.
+        //             TelaDeAtualizacaoController.notificarUsuario(String.format("Largura: %s, Altura: %s", larguraTela, alturaTela));
+        //         }
+        //     }
+        // );
     }
 }
