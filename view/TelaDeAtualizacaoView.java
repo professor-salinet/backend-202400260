@@ -34,85 +34,82 @@ public class TelaDeAtualizacaoView extends JFrame {
 
     public static int tamanhoInputs = 20;
 
-    public static GridBagLayout gbLayout;
-    public static GridBagConstraints gbConstraints;
-
     public TelaDeAtualizacaoView()
     {
         super("Tela de Atualização");
-        gbLayout = new GridBagLayout();
-        setLayout(gbLayout);
-        gbConstraints = new GridBagConstraints();
+        InterfaceController.gbLayout = new GridBagLayout();
+        setLayout(InterfaceController.gbLayout);
+        InterfaceController.gbConstraints = new GridBagConstraints();
         //   setLayout(new GridLayout(7,1,5,5));
 
         lblId = new JLabel("Id:", SwingConstants.RIGHT);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(lblId,0,1,1,1);
+        adicionarComponente(lblId,0,1,1,1);
 
         TelaDeAtualizacaoController.popularIds();
         cbxId = new JComboBox<String>(ids);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(cbxId,0,2,1,1);
+        adicionarComponente(cbxId,0,2,1,1);
 
         // add(linha_id);
 
         lblImagem = new JLabel(InterfaceController.imgPadrao);
         // gbConstraints.fill = GridBagConstraints.BOTH;
-        addComponent(lblImagem, 0, 0, 1, 7);
+        adicionarComponente(lblImagem, 0, 0, 1, 7);
 
         btnCarregarImagem = new JButton("Carregar Imagem");
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(btnCarregarImagem, 1, 1, 1, 1);
+        adicionarComponente(btnCarregarImagem, 1, 1, 1, 1);
 
         btnRemoverImagem = new JButton("Remover Imagem");
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(btnRemoverImagem, 1, 2, 1, 1);
+        adicionarComponente(btnRemoverImagem, 1, 2, 1, 1);
 
         // add(linha_imagem);
 
         lblNome = new JLabel("Nome:", SwingConstants.RIGHT);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(lblNome, 2, 1, 1, 1);
+        adicionarComponente(lblNome, 2, 1, 1, 1);
 
         txtNome = new JTextField(tamanhoInputs);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(txtNome, 2, 2, 1, 1);
+        adicionarComponente(txtNome, 2, 2, 1, 1);
 
         // add(linha_nome);
 
         lblEmail = new JLabel("Email:", SwingConstants.RIGHT);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(lblEmail, 3, 1, 1, 1);
+        adicionarComponente(lblEmail, 3, 1, 1, 1);
 
         txtEmail = new JTextField(tamanhoInputs);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(txtEmail, 3, 2, 1, 1);
+        adicionarComponente(txtEmail, 3, 2, 1, 1);
 
         // add(linha_email);
 
         lblSenha = new JLabel("Senha:", SwingConstants.RIGHT);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(lblSenha, 4, 1, 1, 1);
+        adicionarComponente(lblSenha, 4, 1, 1, 1);
 
         txtSenha = new JPasswordField(tamanhoInputs);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(txtSenha, 4, 2, 1, 1);
+        adicionarComponente(txtSenha, 4, 2, 1, 1);
 
         // add(linha_senha);
 
         btnAtualizar = new JButton("Atualizar");
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(btnAtualizar, 5, 1, 1, 1);
+        adicionarComponente(btnAtualizar, 5, 1, 1, 1);
 
         btnCancelar = new JButton("Cancelar");
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(btnCancelar, 5, 2, 1, 1);
+        adicionarComponente(btnCancelar, 5, 2, 1, 1);
 
         // add(linha_botoes);
 
         lblNotificacoes = new JLabel("Notificações", SwingConstants.CENTER);
         // gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(lblNotificacoes, 6, 1, 2, 1);
+        adicionarComponente(lblNotificacoes, 6, 1, 2, 1);
 
         // add(linha_notificacoes);
 
@@ -170,22 +167,12 @@ public class TelaDeAtualizacaoView extends JFrame {
         cbxId.requestFocus();
     }
 
-    public static String setHtmlFormat(String strTexto) {
-        return "<html><body>" + strTexto + "</body></html>";
+    public static void adicionarComponente(Component component, int row, int column, int width, int height) {
+        InterfaceController.addComponent(appTelaDeAtualizacaoView, component, row, column, width, height);
     }
 
-    public void addComponent(Component component, int row, int column, int width, int height) {
-        if (height > 1) {
-            gbConstraints.fill = GridBagConstraints.BOTH;
-        } else {
-            gbConstraints.fill = GridBagConstraints.HORIZONTAL;
-        }
-        gbConstraints.gridy = row;
-        gbConstraints.gridx = column;
-        gbConstraints.gridwidth = width;
-        gbConstraints.gridheight = height;
-        gbLayout.setConstraints(component, gbConstraints);
-        add(component);
+    public static String setHtmlFormat(String strTexto) {
+        return "<html><body>" + strTexto + "</body></html>";
     }
 
     public static TelaDeAtualizacaoView appTelaDeAtualizacaoView;

@@ -19,8 +19,15 @@ public class MySQLConnector {
         } catch (Exception e) {
             status = "Ops! Algo de errado não está certo com a conexão com o banco de dados MySQL! Mensagem do servidor: " + e;
         }
-        // System.out.println(status);
+        System.out.println(status);
         status.length();
         return conn;
+    }
+    public static void main(String[] args) {
+        try {
+            conectar();
+        } catch (Exception e) {
+            System.err.println("Erro: " + e);
+        }
     }
 }

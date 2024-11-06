@@ -23,6 +23,25 @@ public class InterfaceController extends InterfaceView {
 
     public static final Icon imgPadrao = new ImageIcon(new ImageIcon(localViewFolder + "\\imagem-padrao.jpg").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 
+    public static GridBagLayout gbLayout = new GridBagLayout();;
+    public static GridBagConstraints gbConstraints = new GridBagConstraints();
+
+    public static void addComponent(JFrame frame, Component component, int row, int column, int width, int height) {
+        if (height > 1 && width > 1) {
+            gbConstraints.fill = GridBagConstraints.BOTH;
+        } else if (height > 1) {
+            gbConstraints.fill = GridBagConstraints.VERTICAL;
+        } else {
+            gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+        }
+        gbConstraints.gridy = row;
+        gbConstraints.gridx = column;
+        gbConstraints.gridwidth = width;
+        gbConstraints.gridheight = height;
+        gbLayout.setConstraints(component, gbConstraints);
+        frame.add(component);
+    }
+
     public static void verificarApagarImagensInuteis() {
         final File folder = new File(localViewImgFolder);
         ArrayList<String> strImagens = listFilesForFolder(folder);

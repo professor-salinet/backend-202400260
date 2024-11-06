@@ -7,47 +7,53 @@ import javax.swing.*;
 
 public class TelaDeCadastroView extends JFrame
 {
-    private final JLabel lblNome;
-    private final JTextField txtNome;
+    public static JLabel lblImagem;
 
-    private final JLabel lblEmail;
-    private final JTextField txtEmail;
+    public static JLabel lblNome;
+    public static JTextField txtNome;
 
-    private final JLabel lblSenha;
-    private final JPasswordField txtSenha;
+    public static JLabel lblEmail;
+    public static JTextField txtEmail;
 
-    private final JButton btnCadastrar;
+    public static JLabel lblSenha;
+    public static JPasswordField txtSenha;
 
-    private final JLabel lblNotificacoes;
+    public static JButton btnCadastrar;
+
+    public static JLabel lblNotificacoes;
 
     public TelaDeCadastroView()
     {
         super("Tela de Cadastro");
-        setLayout(new GridLayout(4,2,5,5));
+        // setLayout(new GridLayout(4,2,5,5));
+        setLayout(InterfaceController.gbLayout);
+
+        lblImagem = new JLabel(InterfaceController.imgPadrao);
+        adicionarComponente(lblImagem, 0, 0, 3, 3);
 
         lblNome = new JLabel("Nome:");
-        add(lblNome);
+        adicionarComponente(lblNome, 3, 0, 1, 1);
 
         txtNome = new JTextField(10);
-        add(txtNome);
+        adicionarComponente(lblNome, 3, 1, 1, 1);
 
         lblEmail = new JLabel("Email:");
-        add(lblEmail);
+        adicionarComponente(lblEmail, 4, 0, 1, 1);
 
         txtEmail = new JTextField(10);
-        add(txtEmail);
+        adicionarComponente(txtEmail, 4, 1, 1, 1);
 
         lblSenha = new JLabel("Senha:");
-        add(lblSenha);
+        adicionarComponente(lblSenha, 5, 0, 1, 1);
 
         txtSenha = new JPasswordField(10);
-        add(txtSenha);
+        adicionarComponente(txtSenha, 5, 1, 1, 1);
 
         btnCadastrar = new JButton("Cadastrar");
-        add(btnCadastrar);
+        adicionarComponente(btnCadastrar, 6, 0, 2, 1);
 
         lblNotificacoes = new JLabel("Notificações", SwingConstants.CENTER);
-        add(lblNotificacoes);
+        adicionarComponente(lblNotificacoes, 7, 0, 2, 1);
 
         btnCadastrar.addActionListener(
             new ActionListener() {
@@ -79,6 +85,10 @@ public class TelaDeCadastroView extends JFrame
 
         setSize(250, 250);
         setVisible(true);
+    }
+
+    public static void adicionarComponente(Component component, int row, int column, int width, int height) {
+        InterfaceController.addComponent(appTelaDeCadastroView, component, row, column, width, height);
     }
 
     private String setHtmlFormat(String strTexto) {
