@@ -1,6 +1,5 @@
 package view;
 import controller.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,6 +7,10 @@ import javax.swing.*;
 public class TelaDeCadastroView extends JFrame
 {
     public static JLabel lblImagem;
+    public static String nomeDoArquivo;
+
+    public static JButton btnCarregar;
+    public static JButton btnRemover;
 
     public static JLabel lblNome;
     public static JTextField txtNome;
@@ -22,38 +25,49 @@ public class TelaDeCadastroView extends JFrame
 
     public static JLabel lblNotificacoes;
 
+    public static GridBagLayout gbLayout;
+    public static GridBagConstraints gbConstraints;
+    
     public TelaDeCadastroView()
     {
         super("Tela de Cadastro");
-        // setLayout(new GridLayout(4,2,5,5));
-        setLayout(InterfaceController.gbLayout);
+        gbLayout = new GridBagLayout();
+        setLayout(gbLayout);
+        gbConstraints = new GridBagConstraints();
 
-        lblImagem = new JLabel(InterfaceController.imgPadrao);
-        adicionarComponente(lblImagem, 0, 0, 3, 3);
+        lblImagem = new JLabel("", SwingConstants.CENTER);
+        lblImagem.setIcon(InterfaceController.imgPadrao);
+        addComponent(lblImagem, 0, 0, 2, 2);
+
+        btnCarregar = new JButton("Carregar");
+        addComponent(btnCarregar, 2, 0, 1, 1);
+
+        btnRemover = new JButton("Remover");
+        addComponent(btnRemover, 2, 1, 1, 1);
 
         lblNome = new JLabel("Nome:");
-        adicionarComponente(lblNome, 3, 0, 1, 1);
+        addComponent(lblNome, 3, 0, 1, 1);
 
         txtNome = new JTextField(10);
-        adicionarComponente(lblNome, 3, 1, 1, 1);
+        addComponent(txtNome, 3, 1, 1, 1);
 
         lblEmail = new JLabel("Email:");
-        adicionarComponente(lblEmail, 4, 0, 1, 1);
+        addComponent(lblEmail, 4, 0, 1, 1);
 
         txtEmail = new JTextField(10);
-        adicionarComponente(txtEmail, 4, 1, 1, 1);
+        addComponent(txtEmail, 4, 1, 1, 1);
 
         lblSenha = new JLabel("Senha:");
-        adicionarComponente(lblSenha, 5, 0, 1, 1);
+        addComponent(lblSenha, 5, 0, 1, 1);
 
         txtSenha = new JPasswordField(10);
-        adicionarComponente(txtSenha, 5, 1, 1, 1);
+        addComponent(txtSenha, 5, 1, 1, 1);
 
         btnCadastrar = new JButton("Cadastrar");
-        adicionarComponente(btnCadastrar, 6, 0, 2, 1);
+        addComponent(btnCadastrar, 6, 0, 2, 1);
 
         lblNotificacoes = new JLabel("Notificações", SwingConstants.CENTER);
-        adicionarComponente(lblNotificacoes, 7, 0, 2, 1);
+        addComponent(lblNotificacoes, 7, 0, 2, 1);
 
         btnCadastrar.addActionListener(
             new ActionListener() {
@@ -83,15 +97,54 @@ public class TelaDeCadastroView extends JFrame
             }
         );
 
-        setSize(250, 250);
+        btnCarregar.addActionListener(
+            new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    TelaDeCadastroController.carregarImagem();
+                }
+            }
+        );
+
+        btnRemover.addActionListener(
+            new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    TelaDeCadastroController.removerImagem();
+                }
+            }
+        );
+
+        setSize(220, 280);
         setVisible(true);
     }
 
-    public static void adicionarComponente(Component component, int row, int column, int width, int height) {
-        InterfaceController.addComponent(appTelaDeCadastroView, component, row, column, width, height);
+    public void addComponent(Component component, int row, int column, int width, int height) {
+        try {
+            if (height > 1 && height > 1) {
+                gbConstraints.fill = GridBagConstraints.BOTH;
+            } else if (height > 1) {
+                gbConstraints.fill = GridBagConstraints.VERTICAL;
+            } else {
+                gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+            }
+
+            gbConstraints.gridy = row;
+            gbConstraints.gridx = column;
+            gbConstraints.gridwidth = width;
+            gbConstraints.gridheight = height;
+            gbLayout.setConstraints(component, gbConstraints);
+            add(component);
+        } catch (Exception e) {
+            System.err.println("Erro: " + e);
+        }
     }
 
-    private String setHtmlFormat(String strTexto) {
+    public static void notificarUsuario(String txt) {
+        lblNotificacoes.setText(setHtmlFormat(txt));
+    }
+
+    public static String setHtmlFormat(String strTexto) {
         return "<html><body>" + strTexto + "</body></html>";
     }
 
@@ -99,5 +152,16 @@ public class TelaDeCadastroView extends JFrame
     public static void main(String[] args) {
         appTelaDeCadastroView = new TelaDeCadastroView();
         appTelaDeCadastroView.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        appTelaDeCadastroView.getRootPane().addComponentListener(
+            new ComponentAdapter() {
+                public void componentResized(ComponentEvent e) {
+                    int larguraTela = appTelaDeCadastroView.getWidth();
+                    int alturaTela = appTelaDeCadastroView.getHeight();
+                    // This is only called when the user releases the mouse button.
+                    notificarUsuario(String.format("Largura: %s, Altura: %s", larguraTela, alturaTela));
+                }
+            }
+        );
     }
 }
